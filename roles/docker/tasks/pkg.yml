@@ -23,10 +23,11 @@
     name: Docker
     description: Docker Repository
     file: docker
-    baseurl: https://yum.dockerproject.org/repo/main/centos/7/
+    baseurl: http://yum.dockerproject.org/repo/main/centos/7/
     enabled: yes
-    gpgcheck: yes
-    gpgkey: https://yum.dockerproject.org/gpg
+#    gpgcheck: yes
+    gpgcheck: no
+#    gpgkey: http://yum.dockerproject.org/gpg
 
 - name: Install docker engine (RHEL/CentOS)
   when: ansible_os_family == "RedHat"

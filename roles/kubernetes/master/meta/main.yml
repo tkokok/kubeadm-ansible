@@ -2,3 +2,4 @@
 dependencies:
   - { role: commons/os-checker }
   - { role: commons/pre-install, pkgs: ["kubelet", "kubeadm", "kubectl"] }
+  - { role: commons/pulling-image, kube_imgs: "{{ kube_master_imgs }}" }

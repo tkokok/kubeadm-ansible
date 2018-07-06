@@ -1,0 +1,9 @@
+---
+
+- name: Pull and tag images
+  when: accelerate
+  shell: |
+    docker pull {{ local_registry_prefix }}/{{ item }}
+    docker tag {{ local_registry_prefix }}/{{ item }} k8s.gcr.io/{{ item }}
+    docker rmi {{ local_registry_prefix }}/{{ item }}
+  with_items: "{{ kube_imgs }}"

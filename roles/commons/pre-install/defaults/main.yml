@@ -1,0 +1,9 @@
+---
+
+mirrors:
+  yum:
+    kubernetes: "{% if accelerate %} https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64 {% else %} http://yum.kubernetes.io/repos/kubernetes-el7-x86_64 {% endif %}"
+  container:
+    infra:
+      base: tkokok/pause-amd64
+      ver: 3.1

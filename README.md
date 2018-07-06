@@ -31,13 +31,17 @@ After going through the setup, run the `site.yaml` playbook:
 ```sh
 $ ansible-playbook site.yaml
 ...
-==> master1: TASK [addon : Create Kubernetes dashboard deployment] **************************
-==> master1: changed: [192.16.35.12 -> 192.16.35.12]
-==> master1:
-==> master1: PLAY RECAP *********************************************************************
-==> master1: 192.16.35.10               : ok=18   changed=14   unreachable=0    failed=0
-==> master1: 192.16.35.11               : ok=18   changed=14   unreachable=0    failed=0
-==> master1: 192.16.35.12               : ok=34   changed=29   unreachable=0    failed=0
+ ____________
+< PLAY RECAP >
+ ------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+10.0.20.11                 : ok=32   changed=16   unreachable=0    failed=0
+10.0.20.12                 : ok=23   changed=13   unreachable=0    failed=0
 ```
 
 Download the `admin.conf` from the master node:
@@ -52,10 +56,10 @@ Verify cluster is fully running using kubectl:
 
 $ export KUBECONFIG=~/admin.conf
 $ kubectl get node
-NAME      STATUS    AGE       VERSION
-master1   Ready     22m       v1.6.3
-node1     Ready     20m       v1.6.3
-node2     Ready     20m       v1.6.3
+NAME      STATUS    ROLES     AGE       VERSION
+node-11   Ready     master    4m        v1.11.0
+node-12   Ready     <none>    3m        v1.11.0
+
 
 $ kubectl get po -n kube-system
 NAME                                    READY     STATUS    RESTARTS   AGE
@@ -69,4 +73,29 @@ Finally, reset all kubeadm installed state using `reset-site.yaml` playbook:
 
 ```sh
 $ ansible-playbook reset-site.yaml
+```
+
+
+# Accelerate
+# - Pull images from local registry
+# - Install kubernetes files from aliyun
+
+```sh
+< TASK [commons/pulling-image : Pull and tag images] >
+ ----------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+Friday 06 July 2018  17:10:52 +0800 (0:00:00.449)       0:00:23.869 ***********
+changed: [10.0.20.11] => (item=kube-controller-manager-amd64:v1.11.0)
+changed: [10.0.20.11] => (item=kube-scheduler-amd64:v1.11.0)
+changed: [10.0.20.11] => (item=kube-apiserver-amd64:v1.11.0)
+changed: [10.0.20.11] => (item=kube-proxy-amd64:v1.11.0)
+changed: [10.0.20.11] => (item=pause-amd64:3.1)
+changed: [10.0.20.11] => (item=coredns:1.1.3)
+changed: [10.0.20.11] => (item=etcd-amd64:3.2.18)
+changed: [10.0.20.11] => (item=kubernetes-dashboard-amd64:v1.8.3)
 ```

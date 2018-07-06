@@ -1,0 +1,6 @@
+kube_node_imgs:
+  - kube-proxy-amd64:{{ kube_version }}
+  - pause-amd64:3.1
+  - kubernetes-dashboard-amd64:v1.8.3
+#  - quay.io/calico/node:v2.6.5
+#  - quay.io/calico/cni:v1.11.2

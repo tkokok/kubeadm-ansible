@@ -19,7 +19,8 @@
     name: Kubernetes
     description: Kubernetes Repository
     file: kubernetes
-    baseurl: http://yum.kubernetes.io/repos/kubernetes-el7-x86_64
+#    baseurl: http://yum.kubernetes.io/repos/kubernetes-el7-x86_64
+    baseurl: "{{ mirrors.yum.kubernetes }}"
     enabled: yes
     gpgcheck: no
 
